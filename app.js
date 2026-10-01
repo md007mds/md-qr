@@ -60,7 +60,26 @@
     } catch (err) { message("authMessage", err.message || "Não foi possível autenticar.", true); }
     finally { $("authSubmit").disabled = false; }
   });
+$("forgotPassword").addEventListener("click", async () => {
+  const email = $("email").value.trim();
 
+  if (!email) {
+    message("authMessage", "Digite seu e-mail primeiro.", true);
+    return;
+  }
+
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "https://md-qr.pages.dev/"
+    });
+
+    if (error) throw error;
+
+    message("authMessage", "Se o e-mail estiver cadastrado, você receberá o link de recuperação.");
+  } catch (err) {
+    message("authMessage", err.message || "Não foi possível enviar o e-mail.", true);
+  }
+});
   $("logoutBtn").addEventListener("click", async () => {
     if (supabase) await supabase.auth.signOut();
   });
