@@ -13,7 +13,8 @@ export async function onRequest(context) {
   }
 
   try {
-    const endpoint = `${base.replace(/\/$/, "")}/rest/v1/qr_codes?id=eq.${encodeURIComponent(id)}&select=destination_url,type&limit=1`;
+    const endpoint =
+      `${base.replace(/\/$/, "")}/rest/v1/qr_codes?id=eq.${encodeURIComponent(id)}&select=destination_url,type&limit=1`;
 
     const response = await fetch(endpoint, {
       headers: {
