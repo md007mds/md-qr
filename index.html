@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>MD QR — Gerador de QR Code</title>
+  <meta name="description" content="Crie QR Codes estáticos e dinâmicos com o MD QR.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-icon">▦</span><span>MD <b>QR</b></span></a>
+    <span class="tagline">Crie. Personalize. Acompanhe.</span>
+    <button id="logoutBtn" class="btn btn-quiet hidden">Sair</button>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">GERADOR DE QR CODE</p>
+        <h1>Seus links.<br><span>Em um só código.</span></h1>
+        <p class="hero-copy">Crie QR Codes estáticos ou dinâmicos e gerencie tudo em um painel simples.</p>
+        <div class="hero-pills"><span>✓ Estáticos</span><span>✓ Dinâmicos editáveis</span><span>✓ Download PNG</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="qr-art"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>MD QR</span></div>
+    </section>
+
+    <section id="authSection" class="panel auth-panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">SUA CONTA</p><h2 id="authTitle">Entre no MD QR</h2></div>
+        <div class="switcher"><button id="showLogin" class="active">Entrar</button><button id="showSignup">Criar conta</button></div>
+      </div>
+      <form id="authForm">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+        <label for="password">Senha</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="6" placeholder="Mínimo de 6 caracteres" required>
+        <button id="authSubmit" class="btn btn-primary full" type="submit">Entrar</button>
+        <p id="authMessage" class="message" role="status"></p>
+      </form>
+      <p class="fine-print">Sua conta é gerenciada pelo Supabase. Nunca compartilhe sua senha.</p>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="welcome-row"><div><p class="eyebrow">PAINEL PESSOAL</p><h2>Seus QR Codes</h2><p class="muted">Crie e gerencie os seus links.</p></div><span id="userEmail" class="user-chip"></span></div>
+      <div class="dashboard-grid">
+        <section class="panel create-panel">
+          <div class="panel-heading"><div><p class="eyebrow">NOVO CÓDIGO</p><h3>Criar QR Code</h3></div><span class="icon-bubble">＋</span></div>
+          <form id="createForm">
+            <label for="qrTitle">Nome do código</label>
+            <input id="qrTitle" maxlength="80" placeholder="Ex.: Instagram da loja" required>
+            <label for="qrType">Tipo de QR Code</label>
+            <select id="qrType"><option value="dynamic">Dinâmico — posso trocar o link depois</option><option value="static">Estático — link fixo</option></select>
+            <label for="qrUrl">Link de destino</label>
+            <input id="qrUrl" type="url" placeholder="https://exemplo.com" required>
+            <p class="hint">Use o endereço completo, começando com https://</p>
+            <button class="btn btn-primary full" type="submit">Criar QR Code <span>→</span></button>
+            <p id="createMessage" class="message" role="status"></p>
+          </form>
+        </section>
+        <section class="panel preview-panel">
+          <p class="eyebrow">PRÉVIA</p><h3>Seu código aparece aqui</h3>
+          <div id="qrPreview" class="qr-preview"><div class="empty-qr">▦</div><p>Crie um código para visualizar e baixar.</p></div>
+          <a id="downloadBtn" class="btn btn-secondary full disabled" href="#" download="md-qr.png">Baixar PNG</a>
+          <p id="previewUrl" class="preview-url"></p>
+        </section>
+      </div>
+      <section class="panel list-panel">
+        <div class="panel-heading"><div><p class="eyebrow">BIBLIOTECA</p><h3>Seus códigos salvos</h3></div><button id="refreshBtn" class="btn btn-secondary">Atualizar ↻</button></div>
+        <div id="qrList" class="qr-list"><div class="list-empty">Carregando seus códigos…</div></div>
+      </section>
+    </section>
+
+    <section class="feature-row">
+      <article><span class="feature-icon">↗</span><h3>Dinâmico</h3><p>Altere o destino de um QR Code sem precisar imprimir outro.</p></article>
+      <article><span class="feature-icon">▦</span><h3>Estático</h3><p>Ideal para links fixos e compartilhamento simples.</p></article>
+      <article><span class="feature-icon">⌂</span><h3>Seu painel</h3><p>Seus códigos ficam associados à sua conta.</p></article>
+    </section>
+    <div id="globalMessage" class="global-message" role="status"></div>
+  </main>
+  <footer><span class="brand small-brand">MD <b>QR</b></span><span>Feito para simplificar o compartilhamento.</span><span>Os recursos gratuitos dependem dos limites dos provedores.</span></footer>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
