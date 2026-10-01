@@ -1,5 +1,5 @@
 import { onRequestPost as createPayment } from "./functions/api/create-payment.js";
-import { onRequestPost as pagbankWebhook } from "./functions/api/pagbank-webhook.js";
+import { onRequestPost as pagbankWebhook } from "./pagbank-webhook.js";
 
 export default {
   async fetch(request, env, ctx) {
