@@ -20,9 +20,11 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         reference_id: `MDQR-${Date.now()}`,
 
-        customer: {
-          name: "Cliente MD QR"
-        },
+       customer: {
+  name: "Cliente MD QR",
+  email: "cliente@mdqr.com",
+  tax_id: "00000000000"
+},
 
         items: [
           {
