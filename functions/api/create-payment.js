@@ -56,7 +56,7 @@ export async function onRequestPost(context) {
         ],
 
         notification_urls: [
-        "https://md-q.pages.dev/api/pagbank-webhook"
+        "https://md-qr.mdcombos74.workers.dev/api/pagbank-webhook"
         ]
       })
     });
