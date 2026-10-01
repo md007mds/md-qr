@@ -129,18 +129,42 @@ $("forgotPassword").addEventListener("click", async () => {
     finally { if (btn) btn.disabled = false; }
   });
 
-  async function loadCodes() {
-    if (!session || !supabase) return;
-    $("qrList").innerHTML = '<div class="list-empty">Carregando seus códigos…</div>';
-    const {data, error} = await supabase.from("qr_codes").select("*").order("created_at", {ascending:false});
+
+async function loadCodes() {
+  if (!session || !supabase) return;
+
+  $("qrList").innerHTML =
+    '<div class="list-empty">Carregando seus códigos...</div>';
+
+  const pageSize = 1000;
+  let allCodes = [];
+  let from = 0;
+
+  while (true) {
+    const { data, error } = await supabase
+      .from("qr_codes")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+
     if (error) {
-      $("qrList").innerHTML = '<div class="list-empty">Não foi possível carregar. Confira a configuração do banco e as políticas RLS.</div>';
+      $("qrList").innerHTML =
+        '<div class="list-empty">Não foi possível carregar. Confira a conexão e as políticas RLS.</div>';
       return;
     }
-    currentCodes = data || [];
-    renderCodes();
+
+    const page = data || [];
+    allCodes.push(...page);
+
+    if (page.length < pageSize) break;
+
+    from += pageSize;
   }
 
+  currentCodes = allCodes;
+  renderCodes();
+}
   function renderCodes() {
     const list = $("qrList"); list.innerHTML = "";
     if (!currentCodes.length) {
