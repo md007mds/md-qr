@@ -23,8 +23,7 @@ export async function onRequestPost(context) {
        customer: {
   name: "Cliente MD QR",
   email: "cliente@mdqr.com",
-  tax_id: "00000000000"
-},
+tax_id: "79630442027"
 
         items: [
           {
