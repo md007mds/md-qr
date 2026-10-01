@@ -56,7 +56,7 @@ export async function onRequestPost(context) {
         ],
 
         notification_urls: [
-          "https://SEU-DOMINIO.com/api/pagbank-webhook"
+        "https://md-q.pages.dev/api/pagbank-webhook"
         ]
       })
     });
