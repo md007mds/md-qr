@@ -23,8 +23,8 @@ export async function onRequest(context) {
     });
 
     if (!response.ok) {
-      return new Response("QR Code indisponível.", { status: 404 });
-    }
+  return new Response("Falha no Supabase: HTTP " + response.status, { status: 502 });
+}
 
     const rows = await response.json();
     const item = rows?.[0];
