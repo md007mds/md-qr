@@ -109,3 +109,4 @@ export async function onRequestPost(context) {
     );
   }
 }
+// Redeploy após configurar PAGBANK_TOKEN
