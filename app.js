@@ -194,6 +194,29 @@ $("forgotPassword").addEventListener("click", async () => {
   } else {
     supabase = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
     supabase.auth.getSession().then(({data}) => setLoggedIn(data.session?.user || null));
-    supabase.auth.onAuthStateChange((_event, newSession) => setLoggedIn(newSession?.user || null));
+    supabase.auth.onAuthStateChange((event, newSession) => {
+  setLoggedIn(newSession?.user || null);
+
+  if (event === "PASSWORD_RECOVERY") {
+    setTimeout(async () => {
+      const novaSenha = prompt("Digite sua nova senha (mínimo 6 caracteres):");
+
+      if (!novaSenha || novaSenha.length < 6) {
+        alert("A senha precisa ter pelo menos 6 caracteres.");
+        return;
+      }
+
+      const { error } = await supabase.auth.updateUser({
+        password: novaSenha
+      });
+
+      if (error) {
+        alert("Erro ao alterar senha: " + error.message);
+      } else {
+        alert("Senha alterada com sucesso! Entre com sua nova senha.");
+      }
+    }, 500);
+  }
+});
   }
 })();
