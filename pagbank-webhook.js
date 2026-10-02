@@ -29,7 +29,7 @@ export async function onRequestPost(context) {
 
     // 3. Consulta a chave pública do PagBank
     const keyResponse = await fetch(
-      "https://sandbox.api.pagseguro.com/public-keys?type=webhook",
+      "https://sandbox.api.pagseguro.com/public-keys/webhook",
       {
         headers: {
           "Authorization": `Bearer ${token}`,
