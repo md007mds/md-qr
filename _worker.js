@@ -1,3 +1,4 @@
+import { onRequestGet as getOrder } from "./functions/api/get-order.js";
 import { onRequestPost as createPayment } from "./functions/api/create-payment.js";
 import { onRequestPost as pagbankWebhook } from "./pagbank-webhook.js";
 
@@ -32,7 +33,19 @@ export default {
         ctx
       });
     }
+if (url.pathname === "/api/get-order") {
+  if (request.method !== "GET") {
+    return new Response("Método não permitido.", {
+      status: 405
+    });
+  }
 
+  return getOrder({
+    request,
+    env,
+    ctx
+  });
+}
     return env.ASSETS.fetch(request);
   }
 };
