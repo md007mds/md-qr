@@ -92,6 +92,15 @@ if (url.pathname === "/api/get-order") {
     ctx
   });
 }
+    if (url.pathname === "/api/kiwify-webhook") {
+  if (request.method !== "POST") {
+    return new Response("Método não permitido.", {
+      status: 405
+    });
+  }
+
+  return kiwifyWebhook({ request, env, ctx });
+}
     return env.ASSETS.fetch(request);
   }
 };
