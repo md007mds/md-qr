@@ -19,7 +19,39 @@ export default {
           status: 400
         });
       }
+             const supabaseUrl = env.SUPABASE_URL;
+      const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY;   
+      if (!supabaseUrl || !supabaseKey) {
+        return new Response("Supabase não configurado.", {
+          status: 500
+        });
+      }
+                const response = await fetch(
+        `${supabaseUrl}/rest/v1/qr_codes?id=eq.${encodeURIComponent(qrId)}&select=destination_url&limit=1`,
+        {
+          headers: {
+            "apikey": supabaseKey,
+            "Authorization": `Bearer ${supabaseKey}`,
+            "Accept": "application/json"
+          }
+        }
+      );
+                if (!response.ok) {
+        return new Response("Erro ao consultar QR Code.", {
+          status: 500
+        });
+      }
 
+      const rows = await response.json();
+
+      if (!rows.length || !rows[0].destination_url) {
+        return new Response("QR Code não encontrado.", {
+          status: 404
+        });
+      }
+
+      return Response.redirect(rows[0].destination_url, 302);
+    }
     if (url.pathname === "/api/create-payment") {
       if (request.method !== "POST") {
         return new Response("Método não permitido.", {
