@@ -58,7 +58,7 @@ tax_id: "79630442027"
         ],
 
         notification_urls: [
-        "https://md-qr.mdcombos74.workers.dev/api/pagbank-webhook"
+      "https://md-qr.pages.dev/api/pagbank-webhook"
         ]
       })
     });
