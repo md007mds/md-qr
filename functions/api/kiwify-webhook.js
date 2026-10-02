@@ -1,24 +1,119 @@
 export async function onRequestPost(context) {
-  const { request } = context;
+  const { request, env } = context;
 
   try {
-    const body = await request.text();
+    const body = await request.json();
 
-    console.log("KIWIFY WEBHOOK RECEBIDO:");
-    console.log(body);
+    const email = body?.Customer?.email?.trim().toLowerCase();
+    const orderStatus = body?.order_status;
+    const eventType = body?.webhook_event_type;
+    const orderId = body?.order_id || null;
+    const productName = body?.Product?.product_name || "MD QR - Acesso Vitalício";
+
+    if (!email) {
+      return new Response(
+        JSON.stringify({ success: false, error: "E-mail do cliente não encontrado." }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
+    let status;
+
+    if (orderStatus === "paid" || eventType === "order_approved") {
+      status = "active";
+    } else if (
+      eventType === "order_refunded" ||
+      eventType === "refund" ||
+      eventType === "chargeback"
+    ) {
+      status = "inactive";
+    } else {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          ignored: true,
+          event: eventType,
+          order_status: orderStatus
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
+    const supabaseUrl = env.SUPABASE_URL;
+    const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Supabase não configurado." }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/kiwify_access?on_conflict=email`,
+      {
+        method: "POST",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+          Prefer: "resolution=merge-duplicates,return=minimal"
+        },
+        body: JSON.stringify({
+          email,
+          status,
+          kiwify_transaction_id: orderId,
+          product_name: productName,
+          updated_at: new Date().toISOString()
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+
+      console.error("Erro Supabase:", errorText);
+
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Erro ao atualizar acesso."
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
+    console.log("Kiwify acesso atualizado:", {
+      email,
+      status,
+      orderId,
+      eventType
+    });
 
     return new Response(
       JSON.stringify({
         success: true,
-        received: true
+        email,
+        status
       }),
       {
         status: 200,
-        headers: {
-          "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" }
       }
     );
+
   } catch (error) {
     console.error("Erro no webhook Kiwify:", error);
 
@@ -29,11 +124,8 @@ export async function onRequestPost(context) {
       }),
       {
         status: 500,
-        headers: {
-          "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" }
       }
     );
   }
 }
-
