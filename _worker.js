@@ -1,7 +1,7 @@
 import { onRequestGet as getOrder } from "./functions/api/get-order.js";
 import { onRequestPost as createPayment } from "./functions/api/create-payment.js";
 import { onRequestPost as pagbankWebhook } from "./pagbank-webhook.js";
-
+import { onRequestPost as kiwifyWebhook } from "./functions/api/kiwify-webhook.js";
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
