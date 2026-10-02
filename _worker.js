@@ -5,6 +5,20 @@ import { onRequestPost as pagbankWebhook } from "./pagbank-webhook.js";
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+        if (url.pathname.startsWith("/r/")) {
+      if (request.method !== "GET") {
+        return new Response("Método não permitido.", {
+          status: 405
+        });
+      }
+
+      const qrId = url.pathname.split("/")[2];
+
+      if (!qrId) {
+        return new Response("QR Code não informado.", {
+          status: 400
+        });
+      }
 
     if (url.pathname === "/api/create-payment") {
       if (request.method !== "POST") {
