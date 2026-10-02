@@ -27,20 +27,49 @@
   $("showLogin").addEventListener("click", () => showMode("login"));
   $("showSignup").addEventListener("click", () => showMode("signup"));
 
-  function setLoggedIn(user) {
-    session = user ? { user } : null;
-    authSection.classList.toggle("hidden", !!user);
-    appSection.classList.toggle("hidden", !user);
-    $("logoutBtn").classList.toggle("hidden", !user);
-    if (user) {
-      $("userEmail").textContent = user.email || "Conta MD QR";
-      loadCodes();
-    } else {
-      $("qrList").innerHTML = '<div class="list-empty">Entre para ver seus QR Codes.</div>';
-      currentCodes = [];
-    }
+ async function setLoggedIn(user) {
+  if (!user) {
+    session = null;
+    authSection.classList.remove("hidden");
+    appSection.classList.add("hidden");
+    $("logoutBtn").classList.add("hidden");
+    $("qrList").innerHTML = '<div class="list-empty">Entre para ver seus QR Codes.</div>';
+    currentCodes = [];
+    return;
   }
 
+  const { data: access, error } = await supabase
+    .from("kiwify_access")
+    .select("status")
+    .eq("email", user.email)
+    .maybeSingle();
+
+  if (error || !access || access.status !== "active") {
+    await supabase.auth.signOut();
+    session = null;
+
+    authSection.classList.remove("hidden");
+    appSection.classList.add("hidden");
+    $("logoutBtn").classList.add("hidden");
+
+    message(
+      "authMessage",
+      "Sua conta ainda não possui acesso ao MD QR. Aguarde a liberação da compra.",
+      true
+    );
+
+    return;
+  }
+
+  session = { user };
+
+  authSection.classList.add("hidden");
+  appSection.classList.remove("hidden");
+  $("logoutBtn").classList.remove("hidden");
+  $("userEmail").textContent = user.email || "Conta MD QR";
+
+  loadCodes();
+}
   $("authForm").addEventListener("submit", async e => {
     e.preventDefault();
     if (!supabase) return message("authMessage", "Configure primeiro o arquivo config.js e siga o README.", true);
