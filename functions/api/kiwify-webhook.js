@@ -8,11 +8,34 @@ export async function onRequestPost(context) {
     const orderStatus = body?.order_status;
     const eventType = body?.webhook_event_type;
     const orderId = body?.order_id || null;
-    const productName = body?.Product?.product_name || "MD QR - Acesso Vitalício";
+    const productName =
+      body?.Product?.product_name || "MD QR - Acesso Vitalício";
+    const productId = body?.Product?.product_id;
+
+    const MD_QR_PRODUCT_ID =
+      "02cd7cd0-be6d-11f1-8b2e-5726e7cecf50";
+
+    // Aceita somente eventos do produto MD QR
+    if (productId !== MD_QR_PRODUCT_ID) {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          ignored: true,
+          reason: "Produto não autorizado."
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
 
     if (!email) {
       return new Response(
-        JSON.stringify({ success: false, error: "E-mail do cliente não encontrado." }),
+        JSON.stringify({
+          success: false,
+          error: "E-mail do cliente não encontrado."
+        }),
         {
           status: 400,
           headers: { "Content-Type": "application/json" }
@@ -22,7 +45,10 @@ export async function onRequestPost(context) {
 
     let status;
 
-    if (orderStatus === "paid" || eventType === "order_approved") {
+    if (
+      orderStatus === "paid" ||
+      eventType === "order_approved"
+    ) {
       status = "active";
     } else if (
       eventType === "order_refunded" ||
@@ -50,7 +76,10 @@ export async function onRequestPost(context) {
 
     if (!supabaseUrl || !supabaseKey) {
       return new Response(
-        JSON.stringify({ success: false, error: "Supabase não configurado." }),
+        JSON.stringify({
+          success: false,
+          error: "Supabase não configurado."
+        }),
         {
           status: 500,
           headers: { "Content-Type": "application/json" }
@@ -99,7 +128,8 @@ export async function onRequestPost(context) {
       email,
       status,
       orderId,
-      eventType
+      eventType,
+      productId
     });
 
     return new Response(
