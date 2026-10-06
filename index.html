@@ -3,87 +3,216 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101820">
-  <title>MD QR — Gerador de QR Code</title>
-  <meta name="description" content="Crie QR Codes estáticos e dinâmicos com o MD QR.">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <meta name="theme-color" content="#07110d">
+  <meta name="description" content="MD QR — transforme seus links em um QR Code profissional. Crie, personalize e compartilhe.">
+  <meta property="og:title" content="MD QR — Seus links. Em um só código.">
+  <meta property="og:description" content="Um QR Code profissional para reunir seus links em um só lugar.">
+  <title>MD QR — Seus links. Em um só código.</title>
+  <link rel="stylesheet" href="sales.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#"><span class="brand-icon">▦</span><span>MD <b>QR</b></span></a>
-    <span class="tagline">Crie. Personalize. Acompanhe.</span>
-    <button id="logoutBtn" class="btn btn-quiet hidden">Sair</button>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="MD QR">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>MD <b>QR</b></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="nav-login" href="app.html">Já sou cliente</a>
+    </div>
   </header>
 
-  <main class="wrap">
+  <main id="top">
     <section class="hero">
+      <div class="hero-glow hero-glow-one"></div>
+      <div class="hero-glow hero-glow-two"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> QR CODE INTELIGENTE</div>
+          <h1>Seus links.<br><strong>Em um só código.</strong></h1>
+          <p class="lead">Crie um QR Code profissional para reunir seus links em um único lugar. Simples para você. Prático para quem acessa.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#oferta">Quero meu MD QR <span>→</span></a>
+            <a class="btn btn-ghost" href="#como-funciona">Ver como funciona</a>
+          </div>
+          <div class="trust-line">
+            <span>✓ Acesso vitalício</span>
+            <span>✓ Pagamento único</span>
+            <span>✓ Sem mensalidade</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Demonstração visual do MD QR">
+          <div class="phone">
+            <div class="phone-top"><span>9:41</span><span>● ●</span></div>
+            <div class="profile-dot">MD</div>
+            <div class="phone-brand">MD <b>QR</b></div>
+            <p class="phone-sub">Todos os seus links em um só lugar.</p>
+            <div class="link-card"><span class="mini-icon">◎</span><span>Instagram</span><b>↗</b></div>
+            <div class="link-card"><span class="mini-icon">◉</span><span>WhatsApp</span><b>↗</b></div>
+            <div class="link-card"><span class="mini-icon">▣</span><span>Meu site</span><b>↗</b></div>
+            <div class="phone-footer">md-qr.pages.dev</div>
+          </div>
+          <div class="qr-card">
+            <div class="qr-grid" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <strong>MD QR</strong>
+            <small>APONTE A CÂMERA</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-strip">
+      <div><strong>1 QR Code</strong><span>para reunir seus links</span></div>
+      <div><strong>100% online</strong><span>acesse de qualquer dispositivo</span></div>
+      <div><strong>Pagamento único</strong><span>sem cobrança mensal</span></div>
+    </section>
+
+    <section id="recursos" class="section">
+      <div class="section-heading">
+        <div class="eyebrow"><span></span> POR QUE MD QR</div>
+        <h2>Menos complicação.<br><strong>Mais conexão.</strong></h2>
+        <p>Uma solução direta para quem quer compartilhar vários links sem ficar espalhando uma coleção de URLs por aí.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-number">01</div>
+          <h3>Um único QR Code</h3>
+          <p>Reúna Instagram, WhatsApp, site, catálogo e outros destinos em uma única experiência.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-number">02</div>
+          <h3>QR dinâmico</h3>
+          <p>Quando o código é dinâmico, você pode alterar o destino sem precisar criar outro código.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-number">03</div>
+          <h3>Download em PNG</h3>
+          <p>Baixe seu QR Code e use em cartão de visita, embalagem, anúncio, balcão ou material digital.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-number">04</div>
+          <h3>Painel simples</h3>
+          <p>Crie e organize seus códigos em um painel feito para ser rápido de entender e usar.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section dark-section">
+      <div class="section-heading light">
+        <div class="eyebrow"><span></span> COMO FUNCIONA</div>
+        <h2>Do link ao QR Code<br><strong>em poucos passos.</strong></h2>
+      </div>
+      <div class="steps">
+        <div class="step"><b>01</b><div><h3>Crie sua conta</h3><p>Cadastre-se para acessar seu painel MD QR.</p></div></div>
+        <div class="step"><b>02</b><div><h3>Adicione seu link</h3><p>Informe o destino que você quer transformar em QR Code.</p></div></div>
+        <div class="step"><b>03</b><div><h3>Gere e baixe</h3><p>Seu código aparece na hora e pode ser baixado em PNG.</p></div></div>
+        <div class="step"><b>04</b><div><h3>Compartilhe</h3><p>Coloque seu QR Code onde quiser e facilite o acesso aos seus links.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section use-section">
+      <div class="section-heading">
+        <div class="eyebrow"><span></span> FEITO PARA O DIA A DIA</div>
+        <h2>Um código.<br><strong>Muitas possibilidades.</strong></h2>
+      </div>
+      <div class="use-grid">
+        <div><span>▣</span><strong>Cartões de visita</strong><p>Leve todos os seus contatos e redes em um só lugar.</p></div>
+        <div><span>⌁</span><strong>Instagram & redes</strong><p>Facilite o acesso aos seus principais canais.</p></div>
+        <div><span>□</span><strong>Negócios</strong><p>Use em balcões, vitrines, embalagens e materiais impressos.</p></div>
+        <div><span>↗</span><strong>Divulgação</strong><p>Transforme um anúncio físico em uma porta para o digital.</p></div>
+      </div>
+    </section>
+
+    <section id="oferta" class="offer-section">
+      <div class="offer-card">
+        <div class="offer-copy">
+          <div class="eyebrow"><span></span> ACESSO MD QR</div>
+          <h2>Tenha seu MD QR<br><strong>por um único pagamento.</strong></h2>
+          <p>Sem assinatura mensal. Você compra o acesso e utiliza o MD QR conforme os recursos disponíveis na sua conta.</p>
+          <ul>
+            <li>✓ Acesso vitalício</li>
+            <li>✓ QR Codes estáticos e dinâmicos</li>
+            <li>✓ Painel para gerenciar seus códigos</li>
+            <li>✓ Download dos QR Codes em PNG</li>
+          </ul>
+        </div>
+        <div class="price-box">
+          <span class="price-label">Pagamento único</span>
+          <div class="price"><small>R$</small>29<sup>,90</sup></div>
+          <span class="price-note">sem mensalidade</span>
+          <a class="btn btn-primary btn-buy" href="#checkout">QUERO MEU MD QR <span>→</span></a>
+          <p class="secure-note">Compra online • acesso ao produto após a confirmação</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="checkout" class="checkout-section">
+      <div class="checkout-inner">
+        <div>
+          <div class="eyebrow"><span></span> PRÓXIMO PASSO</div>
+          <h2>Seu MD QR começa aqui.</h2>
+          <p>O botão abaixo está reservado para o checkout do produto. Assim que o checkout PagBank/Kiwify estiver definido, ele pode ser conectado aqui sem alterar a página.</p>
+        </div>
+        <div class="checkout-placeholder">
+          <strong>R$ 29,90</strong>
+          <span>MD QR — Acesso Vitalício</span>
+          <button class="btn btn-primary" id="checkoutButton" type="button">Continuar para pagamento</button>
+          <small id="checkoutMessage">Checkout aguardando a URL de pagamento.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section faq-section">
+      <div class="section-heading">
+        <div class="eyebrow"><span></span> DÚVIDAS</div>
+        <h2>Perguntas<br><strong>frequentes.</strong></h2>
+      </div>
+      <div class="faq-list">
+        <details><summary>O pagamento é mensal?</summary><p>Não. A oferta desta página está estruturada como pagamento único de R$ 29,90.</p></details>
+        <details><summary>O acesso é vitalício?</summary><p>Sim. A oferta apresentada é de acesso vitalício, sem cobrança recorrente.</p></details>
+        <details><summary>Posso editar um QR Code dinâmico?</summary><p>Sim. No painel, os QR Codes dinâmicos permitem alterar o destino sem precisar gerar outro código.</p></details>
+        <details><summary>Posso baixar o QR Code?</summary><p>Sim. O painel atual permite baixar o código em PNG.</p></details>
+        <details><summary>Funciona no celular?</summary><p>Sim. A página de vendas e o painel foram pensados para funcionar também em telas menores.</p></details>
+      </div>
+    </section>
+
+    <section class="final-cta">
       <div>
-        <p class="eyebrow">GERADOR DE QR CODE</p>
-        <h1>Seus links.<br><span>Em um só código.</span></h1>
-        <p class="hero-copy">Crie QR Codes estáticos ou dinâmicos e gerencie tudo em um painel simples.</p>
-        <div class="hero-pills"><span>✓ Estáticos</span><span>✓ Dinâmicos editáveis</span><span>✓ Download PNG</span></div>
+        <div class="eyebrow"><span></span> MD QR</div>
+        <h2>Seus links merecem<br><strong>um acesso mais simples.</strong></h2>
       </div>
-      <div class="hero-art" aria-hidden="true"><div class="qr-art"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>MD QR</span></div>
+      <a class="btn btn-primary" href="#oferta">Quero meu MD QR <span>→</span></a>
     </section>
-
-    <section id="authSection" class="panel auth-panel">
-      <div class="panel-heading">
-        <div><p class="eyebrow">SUA CONTA</p><h2 id="authTitle">Entre no MD QR</h2></div>
-        <div class="switcher"><button id="showLogin" class="active">Entrar</button><button id="showSignup">Criar conta</button></div>
-      </div>
-      <form id="authForm">
-        <label for="email">E-mail</label>
-        <input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
-        <label for="password">Senha</label>
-        <input id="password" type="password" autocomplete="current-password" minlength="6" placeholder="Mínimo de 6 caracteres" required>
-        <p><button id="forgotPassword" type="button">Esqueci minha senha</button></p>
-        <button id="authSubmit" class="btn btn-primary full" type="submit">Entrar</button>
-        <p id="authMessage" class="message" role="status"></p>
-      </form>
-      <p class="fine-print">Sua conta é gerenciada pelo Supabase. Nunca compartilhe sua senha.</p>
-    </section>
-
-    <section id="appSection" class="hidden">
-      <div class="welcome-row"><div><p class="eyebrow">PAINEL PESSOAL</p><h2>Seus QR Codes</h2><p class="muted">Crie e gerencie os seus links.</p></div><span id="userEmail" class="user-chip"></span></div>
-      <div class="dashboard-grid">
-        <section class="panel create-panel">
-          <div class="panel-heading"><div><p class="eyebrow">NOVO CÓDIGO</p><h3>Criar QR Code</h3></div><span class="icon-bubble">＋</span></div>
-          <form id="createForm">
-            <label for="qrTitle">Nome do código</label>
-            <input id="qrTitle" maxlength="80" placeholder="Ex.: Instagram da loja" required>
-            <label for="qrType">Tipo de QR Code</label>
-            <select id="qrType"><option value="dynamic">Dinâmico — posso trocar o link depois</option><option value="static">Estático — link fixo</option></select>
-            <label for="qrUrl">Link de destino</label>
-            <input id="qrUrl" type="url" placeholder="https://exemplo.com" required>
-            <p class="hint">Use o endereço completo, começando com https://</p>
-            <button class="btn btn-primary full" type="submit">Criar QR Code <span>→</span></button>
-            <p id="createMessage" class="message" role="status"></p>
-          </form>
-        </section>
-        <section class="panel preview-panel">
-          <p class="eyebrow">PRÉVIA</p><h3>Seu código aparece aqui</h3>
-          <div id="qrPreview" class="qr-preview"><div class="empty-qr">▦</div><p>Crie um código para visualizar e baixar.</p></div>
-          <a id="downloadBtn" class="btn btn-secondary full disabled" href="#" download="md-qr.png">Baixar PNG</a>
-          <p id="previewUrl" class="preview-url"></p>
-        </section>
-      </div>
-      <section class="panel list-panel">
-        <div class="panel-heading"><div><p class="eyebrow">BIBLIOTECA</p><h3>Seus códigos salvos</h3></div><button id="refreshBtn" class="btn btn-secondary">Atualizar ↻</button></div>
-        <div id="qrList" class="qr-list"><div class="list-empty">Carregando seus códigos…</div></div>
-      </section>
-    </section>
-
-    <section class="feature-row">
-      <article><span class="feature-icon">↗</span><h3>Dinâmico</h3><p>Altere o destino de um QR Code sem precisar imprimir outro.</p></article>
-      <article><span class="feature-icon">▦</span><h3>Estático</h3><p>Ideal para links fixos e compartilhamento simples.</p></article>
-      <article><span class="feature-icon">⌂</span><h3>Seu painel</h3><p>Seus códigos ficam associados à sua conta.</p></article>
-    </section>
-    <div id="globalMessage" class="global-message" role="status"></div>
   </main>
-  <footer><span class="brand small-brand">MD <b>QR</b></span><span>Feito para simplificar o compartilhamento.</span><span>Os recursos gratuitos dependem dos limites dos provedores.</span></footer>
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+
+  <footer class="footer">
+    <div class="footer-brand"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><strong>MD <b>QR</b></strong></div>
+    <p>Crie. Personalise. Acompanhe.</p>
+    <a href="app.html">Acessar minha conta</a>
+    <span>© 2026 MD QR</span>
+  </footer>
+
+  <script>
+    // Defina a URL do checkout quando o PagBank/Kiwify estiver pronto.
+    // Ex.: const CHECKOUT_URL = "https://seu-checkout...";
+    const CHECKOUT_URL = "";
+    const btn = document.getElementById("checkoutButton");
+    const msg = document.getElementById("checkoutMessage");
+    btn.addEventListener("click", () => {
+      if (CHECKOUT_URL) {
+        window.location.href = CHECKOUT_URL;
+        return;
+      }
+      msg.textContent = "O checkout ainda não foi conectado. A página já está pronta para receber o link de pagamento.";
+      msg.classList.add("active");
+    });
+  </script>
 </body>
 </html>

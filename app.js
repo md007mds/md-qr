@@ -99,7 +99,7 @@ $("forgotPassword").addEventListener("click", async () => {
 
   try {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://md-qr.pages.dev/"
+      redirectTo: "https://md-qr.pages.dev/app.html"
     });
 
     if (error) throw error;
