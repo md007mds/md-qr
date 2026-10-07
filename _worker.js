@@ -2,6 +2,7 @@ import { onRequestGet as getOrder } from "./functions/api/get-order.js";
 import { onRequestPost as createPayment } from "./functions/api/create-payment.js";
 import { onRequestPost as pagbankWebhook } from "./pagbank-webhook.js";
 import { onRequestPost as kiwifyWebhook } from "./functions/api/kiwify-webhook.js";
+import { onRequestPost as asaasWebhook } from "./functions/api/asaas-webhook.js";
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -100,6 +101,14 @@ if (url.pathname === "/api/get-order") {
   }
 
   return kiwifyWebhook({ request, env, ctx });
+      }
+      if (url.pathname === "/api/asaas-webhook") {
+  if (request.method !== "POST") {
+    return new Response("Método não permitido.", {
+      status: 405
+    });
+  }
+  return asaasWebhook({ request, env, ctx });
 }
     return env.ASSETS.fetch(request);
   }
